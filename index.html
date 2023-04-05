@@ -6,5 +6,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lessom 32</title>
   </head>
-  <body></body>
+  <body>
+    <!-- Task 3 -->
+
+    <ul class="shop-list">
+      <li>Iphone 13</li>
+      <li>Iphone 14</li>
+      <li>Samsung S21</li>
+      <li>Iphone 14</li>
+      <li>Samsung S21</li>
+      <li>Samsung S22</li>
+      <li>Samsung S22</li>
+      <li>Iphone 14 ProMax</li>
+    </ul>
+    <script>
+      // Task 1
+
+      let mixin = {
+        vat() {
+          return this.price + this.price * 0.2;
+        },
+        exiseDuty() {
+          return this.price + this.price * 0.3 + 10;
+        },
+        singleTax() {
+          return this.price + 1;
+        },
+      };
+
+      class Cola {
+        constructor(brand, price) {
+          this.brand = brand;
+          this.price = price;
+        }
+      }
+      Object.assign(Cola.prototype, mixin);
+
+      class Whiskey {
+        constructor(brand, price) {
+          this.brand = brand;
+          this.price = price;
+        }
+      }
+      Object.assign(Whiskey.prototype, mixin);
+
+      class Ice {
+        constructor(price) {
+          this.price = price;
+        }
+      }
+      Object.assign(Ice.prototype, mixin);
+
+      let cocaCola = new Cola("Coca-Cola", 10);
+      let johnwalker = new Whiskey("john walker", 100);
+      let ice = new Ice(2);
+
+      console.log(cocaCola.vat());
+      console.log(johnwalker.exiseDuty());
+      console.log(ice.singleTax());
+
+      // Task 2
+
+      function uniceString(values) {
+        const uniceElement = [...new Set(values.split("; "))];
+        return uniceElement.join("; ");
+      }
+
+      console.log(uniceString("cherry; orange; cherry; banana; banana"));
+
+      // Task 3
+
+      const shopList = document.querySelector(".shop-list");
+      const li = shopList.querySelectorAll("li");
+
+      const uniqueStrings = new Set();
+
+      li.forEach((li) => {
+        uniqueStrings.add(li.textContent);
+      });
+
+      console.log([...uniqueStrings]);
+
+      // Task 4
+
+      let userVisits = new Map();
+
+      function mikeVisits(user) {
+        let visits = userVisits.get(user) || 0;
+        userVisits.set(user, visits + 1);
+      }
+
+      function bobVisits(user) {
+        let visits = userVisits.get(user) || 0;
+        userVisits.set(user, visits + 1);
+      }
+
+      function nikolaVisits(user) {
+        let visits = userVisits.get(user) || 0;
+        userVisits.set(user, visits + 1);
+      }
+
+      let mike = { name: "Mike", age: 18 };
+      let bob = { name: "Bob", age: 25 };
+      let nikola = { name: "nikola", age: 32 };
+
+      mikeVisits(mike);
+      mikeVisits(mike);
+      mikeVisits(mike);
+      bobVisits(bob);
+      nikolaVisits(nikola);
+      nikolaVisits(nikola);
+
+      console.log(userVisits.get(mike));
+      console.log(userVisits.get(bob));
+      console.log(userVisits.get(nikola));
+    </script>
+  </body>
 </html>
